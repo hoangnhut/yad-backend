@@ -9,6 +9,7 @@ var SQLiteStore = require("connect-sqlite3")(session);
 
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
+var dashboardRouter = require("./routes/dashboard");
 var usersRouter = require("./routes/users");
 
 var app = express();
@@ -31,6 +32,7 @@ app.use(passport.authenticate("session"));
 
 app.use("/", indexRouter);
 app.use("/", authRouter);
+app.use("/dashboard", dashboardRouter);
 app.use("/users", usersRouter);
 
 module.exports = app;
