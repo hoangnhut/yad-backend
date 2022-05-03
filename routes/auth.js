@@ -22,6 +22,18 @@ passport.use(
   })
 );
 
+passport.serializeUser(function (user, callback) {
+  process.nextTick(function () {
+    callback(null, { id: user.id, username: user.username });
+  });
+});
+
+passport.deserializeUser(function (user, callback) {
+  process.nextTick(function () {
+    return callback(null, user);
+  });
+});
+
 router.post(
   "/login",
   passport.authenticate("local", {
