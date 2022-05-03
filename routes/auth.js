@@ -7,13 +7,18 @@ var users = require("../db/users");
 
 passport.use(
   new LocalStrategy(function verify(username, password, callback) {
+    let loggedInUser = users.find(
+      (u) => u.username === username && u.password === password
+    );
+
     // sai username hoac password
+    if (loggedInUser) {
+      // dung username hoac password
+      return callback(null, loggedInUser);
+    }
     return callback(null, false, {
       message: "Incorrect username or password.",
     });
-
-    // dung username hoac password
-    return callback(null, row);
   })
 );
 
